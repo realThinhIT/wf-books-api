@@ -3,6 +3,7 @@ from typing import Any
 from botocore.exceptions import ClientError
 from fastapi import APIRouter, HTTPException, status
 
+from app.config import config
 from app.schemas.books import BookOut, BookIn
 from app.database import books as book_db
 
@@ -35,7 +36,7 @@ async def create_book(book_data: BookIn) -> Any:
 async def get_book(book_id: str) -> Any:
     # Retrieve book from the DB, raise errors if any
     try:
-        book = book_db.get_book(book_id)
+        book = book_db.get_book(config.BOOK_ID_FORMAT.format(id=book_id))
     except (ClientError, Exception) as e:
         raise HTTPException(status_code=500, detail=f"Unexpected error: {str(e)}")
 
