@@ -1,4 +1,4 @@
-from typing import List, Any
+from typing import Any
 
 from botocore.exceptions import ClientError
 from fastapi import APIRouter, HTTPException
@@ -15,7 +15,7 @@ router = APIRouter(
 
 @router.post(
     "/",
-    response_model=List[BookOut]
+    response_model=BookOut
 )
 async def create_book(book_data: BookIn) -> Any:
     # Create a new book in DB, raise errors if any

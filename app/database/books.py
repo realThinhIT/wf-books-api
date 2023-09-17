@@ -18,7 +18,7 @@ def create_book(book_data: dict):
 
 
 def get_book(book_id: str):
-    response = book_table.get_item(Key={"id": BOOK_ID_FORMAT.format(book_id)})
+    response = book_table.get_item(Key={"id": BOOK_ID_FORMAT.format(id=book_id)})
     book = response.get("Item")
 
     return book
