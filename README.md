@@ -1,5 +1,25 @@
 # PYTHON CODING CHALLENGE: REST API ON FASTAPI
 
+## Table of Contents
+  * [Assumptions](#assumptions)
+  * [Database Design](#database-design)
+  * [Prerequisites](#prerequisites)
+    + [For Deployment](#for-deployment)
+  * [Environment Preparation](#environment-preparation)
+    + [Setting Up Virtualenv (Optional)](#setting-up-virtualenv-optional)
+    + [Install Dependencies](#install-dependencies)
+  * [Run API Server (Locally)](#run-api-server-locally)
+  * [Deployment Using Serverless Framework](#deployment-using-serverless-framework)
+    + [Setup Serverless Framework](#setup-serverless-framework)
+    + [Setting Up AWS & CLI](#setting-up-aws--cli)
+    + [Deploy The App To AWS Using Serverless Framework](#deploy-the-app-to-aws-using-serverless-framework)
+  * [Testing](#testing)
+    + [Test Cases](#test-cases)
+    + [Test Coverage](#test-coverage)
+    + [Run Tests](#run-tests)
+
+<!-- TOC end -->
+
 ## Assumptions
 
 - (1) In this challenge, `author` is just a reference string to "an author". 
@@ -106,9 +126,9 @@ This will deploy:
 
 ![img.png](docs/testing/coverage.png)
 
-- Integration tests:
+- Integration tests (Using live external DB):
   - `test_create_and_retrieve_book`: Test the whole flow (book creation -> book retrieval) using an external and live DynamoDB.
-- Unit tests:
+- Unit tests (Using mocked DB):
   - API / Endpoints:
     - `test_create_book_api_success`: Test create book successfully -> HTTP 201
     - `test_create_book_api_failed_400`: Test create book unsuccessfully (incorrect data) -> HTTP 400
