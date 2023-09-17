@@ -9,4 +9,4 @@ dynamodb = boto3.resource(
     region_name=config.DB_REGION_NAME
 )
 
-book_table = dynamodb.Table(config.DB_BOOK_TABLE_NAME)
+table = dynamodb.Table(config.DB_DYNAMODB_TABLE)

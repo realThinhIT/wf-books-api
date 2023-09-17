@@ -1,7 +1,7 @@
 import uuid
 
 from app.config import config
-from app.database import book_table
+from app.database import table
 
 
 def create_book(book_data: dict) -> dict:
@@ -11,13 +11,13 @@ def create_book(book_data: dict) -> dict:
         book_data["id"] = book_id
 
     # Commit to DB
-    book_table.put_item(Item=book_data)
+    table.put_item(Item=book_data)
 
     return book_data
 
 
 def get_book(book_id: str) -> dict:
-    response = book_table.get_item(Key={"id": book_id})
+    response = table.get_item(Key={"id": book_id})
     book = response.get("Item")
 
     return book

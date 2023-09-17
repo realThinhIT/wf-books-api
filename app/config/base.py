@@ -6,7 +6,7 @@ class BaseConfig:
 
     AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
     AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
-    DB_BOOK_TABLE_NAME = os.getenv("DB_BOOK_TABLE_NAME", "Books")
+    DB_DYNAMODB_TABLE = os.getenv("DB_DYNAMODB_TABLE", "Books")
     DB_REGION_NAME = os.getenv("DB_REGION_NAME", "ap-southeast-1")
 
     BOOK_ID_FORMAT = "/books/{id}"

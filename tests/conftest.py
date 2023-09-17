@@ -9,7 +9,7 @@ from app.config import config
 from app.main import app
 from tests.utils import generate_random_str
 
-table_name = config.DB_BOOK_TABLE_NAME
+table_name = config.DB_DYNAMODB_TABLE
 key_schema = [
     {
         "AttributeName": "id",
