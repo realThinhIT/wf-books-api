@@ -1,0 +1,61 @@
+service: serverless-wf-books-api
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: python3.8
+  stage: '${opt:stage, "dev"}'
+  region: '${opt:region, "ap-southeast-1"}'
+  environment:
+    ENVIRONMENT: '${opt:stage, "dev"}'
+    DB_DYNAMODB_TABLE: 'Books-${self:provider.stage}'
+    DB_REGION_NAME: '${opt:region, "ap-southeast-1"}'
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+          Resource:
+            - { "Fn::GetAtt": [ "BookDynamoDbTable", "Arn" ] }
+
+plugins:
+  - serverless-python-requirements
+
+package:
+    exclude:
+        - README.md
+        - tests/**
+        - venv/**
+        - .serverless/**
+        - .pytest_cache
+
+resources:
+  Resources:
+    BookDynamoDbTable:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: id
+            AttributeType: S
+        KeySchema:
+          -
+            AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5
+        TableName: '${self:provider.environment.DB_DYNAMODB_TABLE}'
+
+functions:
+  api:
+    handler: app.main.handler
+    events:
+      - httpApi: '*'
