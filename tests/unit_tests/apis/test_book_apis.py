@@ -1,5 +1,5 @@
 import moto
-from starlette import status
+from fastapi import status
 
 from app.database import books as book_db
 from tests.conftest import generate_dummy_book_data, create_book_table

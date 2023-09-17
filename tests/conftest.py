@@ -3,7 +3,7 @@ import uuid
 import boto3
 import moto
 import pytest
-from starlette.testclient import TestClient
+from fastapi.testclient import TestClient
 
 from app.config import config
 from app.main import app
