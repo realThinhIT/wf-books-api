@@ -105,12 +105,14 @@ $ aws configure
 
 ### Deploy The App To AWS Using Serverless Framework
 
+Run these commands to deploy the app to AWS:
+
 ```
 $ cd /path/to/wf-books-api
 $ sls deploy
 ```
 
-Follow the instructions to deploy (if any).
+![img.png](docs/testing/serverless-deployment.png)
 
 This will deploy:
 
