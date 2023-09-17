@@ -1,10 +1,8 @@
 import uuid
 
-from app.database import dynamodb
+from app.database import book_table
 
 BOOK_ID_FORMAT = "/books/{id}"
-book_table = dynamodb.Table("Books")
-
 
 def create_book(book_data: dict):
     # Create an unique ID for the new book
