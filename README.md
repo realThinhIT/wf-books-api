@@ -8,7 +8,7 @@
 - (4) Upon creation, users don't need to send an `id`. The system would automatically generate it.
 
 
-## Database design
+## Database Design
 
 As stated in the assumptions, `author` is just a reference string & we only query books using `id`. 
 
@@ -28,3 +28,17 @@ a) Redesigning the schema to:
 b) Create a separate table `Author` to store authors.
 ```
 
+## Prerequisites
+- Python 3.6+
+
+
+## Environment Preparation
+
+
+## Run API Server
+
+
+## Deployment
+
+
+## Testing
