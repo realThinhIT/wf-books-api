@@ -29,7 +29,12 @@ b) Create a separate table `Author` to store authors.
 ```
 
 ## Prerequisites
-- Python 3.6+
+- Python 3.8+
+
+For deployment:
+- Node.js (for Deployment / Serverless Framework)
+- AWS Account with access to AWS DynamoDB, AWS Lambda, AWS API Gateway.
+- AWS CLI v2
 
 
 ## Environment Preparation
@@ -38,7 +43,8 @@ b) Create a separate table `Author` to store authors.
 ## Run API Server
 
 
-## Deployment
+## Deployment Using Serverless Framework
+
 
 
 ## Testing

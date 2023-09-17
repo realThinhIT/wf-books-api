@@ -5,9 +5,8 @@ from tests.utils import batch_assert
 
 
 def test_create_and_retrieve_book(app_client):
-    new_book_data = generate_dummy_book_data()
-
     # Call API to commit to create a new record in external test DB
+    new_book_data = generate_dummy_book_data()
     create_response = app_client.post(
         "/api/books",
         json=new_book_data

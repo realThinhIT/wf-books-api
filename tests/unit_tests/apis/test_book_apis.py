@@ -2,14 +2,14 @@ import moto
 from fastapi import status
 
 from app.database import books as book_db
-from tests.conftest import generate_dummy_book_data, create_book_table
+from tests.conftest import generate_dummy_book_data, create_mock_book_table
 from tests.utils import batch_assert, generate_random_str
 
 
 @moto.mock_dynamodb
 def test_create_book_api_success(app_client):
     # Create book table
-    create_book_table()
+    create_mock_book_table()
 
     # Send a POST request to create a new book
     new_book_data = generate_dummy_book_data()
@@ -30,7 +30,7 @@ def test_create_book_api_success(app_client):
 @moto.mock_dynamodb
 def test_create_book_api_failed_400(app_client):
     # Create book table
-    create_book_table()
+    create_mock_book_table()
 
     # Send a POST request to create a new book
     new_book_data = generate_dummy_book_data()
@@ -74,7 +74,7 @@ def test_create_book_api_failed_500(app_client):
 @moto.mock_dynamodb
 def test_get_book_api_success(app_client):
     # Create book table and create a new book in the DB
-    create_book_table()
+    create_mock_book_table()
     new_book_data = book_db.create_book(generate_dummy_book_data())
 
     # Perform a GET request to get the record
@@ -93,7 +93,7 @@ def test_get_book_api_success(app_client):
 @moto.mock_dynamodb
 def test_get_book_api_failed_404(app_client):
     # Create book table and create a new book in the DB
-    create_book_table()
+    create_mock_book_table()
 
     # Perform a GET request to get the record
     response = app_client.get(

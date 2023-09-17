@@ -1,14 +1,14 @@
 import moto
 
 from app.database import books as book_db
-from tests.conftest import create_book_table, generate_dummy_book_data
+from tests.conftest import create_mock_book_table, generate_dummy_book_data
 from tests.utils import batch_assert
 
 
 @moto.mock_dynamodb
 def test_create_book_func_success():
     # Create book table
-    resource = create_book_table()
+    resource = create_mock_book_table()
 
     # Try to create book
     book_data = book_db.create_book(generate_dummy_book_data())
@@ -26,7 +26,7 @@ def test_create_book_func_success():
 @moto.mock_dynamodb
 def test_get_book_func_success():
     # Create book table and populate a new book
-    create_book_table()
+    create_mock_book_table()
     book_data = generate_dummy_book_data()
     book_db.create_book(book_data)
 

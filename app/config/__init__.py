@@ -2,7 +2,7 @@ import os
 import importlib
 
 # Retrieve current environment, if one is not specified, fallback to 'development'
-env = os.getenv('ENVIRONMENT', 'dev')
+env = os.getenv('ENV', 'dev')
 
 # Try to import the configurations of that environment
 try:

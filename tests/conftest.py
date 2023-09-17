@@ -1,3 +1,4 @@
+import os
 import uuid
 
 import boto3
@@ -25,6 +26,30 @@ provisioned_throughput = {
 }
 
 
+@pytest.fixture(scope="session", autouse=True)
+def check_env_and_create_table(*_, **__):
+    from app.database import dynamodb, dynamodb_client
+
+    # Only allow running tests in test environment
+    if os.getenv("ENV") != "test":
+        raise Exception("Tests can only be executed in 'test' environment.")
+
+    # For integration tests: If test table is not available, create one
+    if config.DB_DYNAMODB_TABLE not in [table.name for table in dynamodb.tables.all()]:
+        dynamodb.create_table(
+            TableName=table_name,
+            KeySchema=key_schema,
+            AttributeDefinitions=attributes_definition,
+            ProvisionedThroughput=provisioned_throughput
+        )
+
+        waiter = dynamodb_client.get_waiter('table_exists')  # Wait till the table is created
+        waiter.wait(TableName=config.DB_DYNAMODB_TABLE)
+
+    # Check if the test table is available
+    assert config.DB_DYNAMODB_TABLE in [table.name for table in dynamodb.tables.all()]
+
+
 @pytest.fixture
 @moto.mock_dynamodb
 def app_client():
@@ -35,13 +60,13 @@ def app_client():
     return TestClient(app)
 
 
-def create_book_table():
+def create_mock_book_table():
     # Create table
     dynamodb = boto3.client(
         "dynamodb",
         aws_access_key_id="test",
         aws_secret_access_key="test",
-        region_name=config.DB_REGION_NAME,
+        region_name=config.DB_REGION_NAME
     )
 
     dynamodb.create_table(

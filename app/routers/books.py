@@ -22,7 +22,7 @@ router = APIRouter(
 async def create_book(book_data: BookIn) -> Any:
     # Create a new book in DB, raise errors if any
     try:
-        new_book = book_db.create_book(book_data.model_dump())
+        new_book = book_db.create_book(book_data.dict())
     except (ClientError, Exception) as e:
         raise HTTPException(status_code=500, detail=f"Unexpected error: {str(e)}")
 
