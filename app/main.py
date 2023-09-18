@@ -13,7 +13,12 @@ app = FastAPI()
 app.include_router(api_routers)
 
 # Add CORS middleware for browser requests
-app.add_middleware(CORSMiddleware, allow_origins=['*'])
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
 
 
 # Change validation error to 400 instead of 422
